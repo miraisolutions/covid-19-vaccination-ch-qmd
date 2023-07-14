@@ -1,0 +1,43 @@
+---
+title: "Migration notes"
+---
+
+## R Packages
+
+With latest version of knitr and all packages we observed a problem with rendering plotly graphs.
+
+The 'yaml' package is required to parse dependencies within Quarto Markdown files. To be added to the ren project
+
+## renv
+
+Source:
+
+https://community.rstudio.com/t/possibility-to-specify-renv-for-quarto-render/161423
+
+renv can be added, the DESCRIPTION file can be first be in the project to allow renv::restore()
+
+We could use the same set up as for the old app:
+
+R. 4.2.1 Same renv.lock file.
+
+## Shiny
+
+The Quarto website is ultimately a static website - it won't be responding to user input or running any R code. You can embed a shiny app into a qmd that you render in the rstudio IDE and it'll work just fine because the shiny app is running in a session on your computer. Website hosting services like quarto-pub, netlify, and gh-pages will only be serving up the html pages of the site, not running the code necessary to operate the shiny app in response to user input.
+
+https://github.com/quarto-dev/quarto-cli/discussions/1561
+
+## Good sources
+
+-   [R Quarto Tutorial -- How To Create Interactive Markdown Documents](https://r-craft.org/r-news/r-quarto-tutorial-how-to-create-interactive-markdown-documents/)
+
+-   [htmlwidgets for R](https://quarto.org/docs/interactive/widgets/htmlwidgets.html)
+
+-   [Use Shiny with Quarto](https://quarto.org/docs/interactive/shiny/)
+
+-   [Interactive Quarto Reports with Shiny using {shiny.i18n}](https://www.r-bloggers.com/2023/03/interactive-quarto-reports-with-shiny-using-shiny-i18n/)
+
+https://quarto.org/docs/blog/posts/2022-10-25-shinylive-extension/
+
+-   [ShinyApp QUarto blog](https://community.rstudio.com/t/shinyapp-in-quarto-blog/159319/2)
+
+https://jauntyjjs.github.io/Trelliscopejs_In_Quarto_Example/

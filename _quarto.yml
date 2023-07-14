@@ -1,0 +1,8 @@
+project:
+  title: "covid-19-vaccination-ch-qmd"
+
+editor: visual
+
+execute:
+  echo: false
+  warning: false
