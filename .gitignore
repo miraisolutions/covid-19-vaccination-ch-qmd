@@ -5,3 +5,6 @@
 .DS_Store
 .quarto
 rsconnect
+/.quarto/
+covid-19-vaccination-ch-qmd_files
+covid-19-vaccination-ch-qmd.html

@@ -146,7 +146,7 @@
     panel.grid.minor = element_line(colour = "white", linewidth = 0.1),
     # panel.spacing.x = unit(1, "points"),
     panel.spacing.x = unit(2, "lines"),
-    line = element_line(size = 2.2),
+    line = element_line(linewidth = 2.2),
     axis.line.x = element_line(color = "grey45", linewidth = 0.5),
     axis.line.y = element_line(color = "grey45", linewidth = 0.5),
     axis.text.x = element_text(size = .sizetext(facet),
