@@ -185,7 +185,8 @@ rescale_unknown <- function(data, by = c("AsOfDate","AgeClass", "Case")) {
     #group_by(.dots = c(setdiff(by, "AgeClass"), "Status")) %>%
     group_by(across(all_of(c(setdiff(by, "AgeClass"), "Status")))) %>%
     #this should work, to be testes
-    summarise(across(where(is.numeric), sum, na.rm = TRUE)) %>%
+    #summarise(across(where(is.numeric), sum, na.rm = TRUE)) %>%
+    summarise(across(where(is.numeric), ~sum(.x, na.rm = TRUE))) %>%
     ungroup() %>%
     mutate(AgeClass = "All")
 

@@ -5,6 +5,7 @@
 #' @param writerds logical write RDS files
 #' 
 #' @importFrom jsonlite fromJSON 
+#' @importFrom tidyr pivot_longer
 #' @import dplyr
 build_data <- function(url = bag_api_url, agemap = ageclassMap, writerds = TRUE) {
   message("BUILD DATA")

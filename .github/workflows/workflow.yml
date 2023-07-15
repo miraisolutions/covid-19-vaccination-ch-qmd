@@ -53,7 +53,7 @@ jobs:
         # if: github.event_name == 'schedule'
         run: |
           # pkgload::load_all(export_all = TRUE, helpers = FALSE, attach_testthat = FALSE)
-          library(dplyr); library(jsonlite);
+          library(dplyr); library(jsonlite); library(tidyr);
           sapply(file.path("R", list.files("R")), source)
           build_data()
         shell: Rscript {0}
@@ -70,7 +70,7 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add inst/bag_data/\*
+          git add www/bag_data/\*
           git commit -m "Update BAG data" || echo "No changes to commit"
           git pull --ff-only
           git push origin

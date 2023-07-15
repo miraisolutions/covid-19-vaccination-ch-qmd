@@ -131,7 +131,8 @@ read_bag_data_cases <- function(bag.admin.url, ageclassMap, dateweek = NULL) {
 
     res_age_tot <-  res %>%
       group_by(Week,AsOfDate,geoRegion) %>%
-      summarize(across(where(is.numeric), sum, na.rm = TRUE)) %>%
+      #summarize(across(where(is.numeric), sum, na.rm = TRUE)) %>%
+      summarize(across(where(is.numeric), ~ sum(.x, na.rm = TRUE))) %>%
       ungroup() %>%
       mutate(ageclass = "All", AgeClass = "All", AgeClass2 = "All")
 
