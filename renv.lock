@@ -760,6 +760,19 @@
       ],
       "Hash": "6c00a09ba7d34917d9a3e28b15dd74e3"
     },
+    "processx": {
+      "Package": "processx",
+      "Version": "3.8.2",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "R6",
+        "ps",
+        "utils"
+      ],
+      "Hash": "3efbd8ac1be0296a46c55387aeace0f3"
+    },
     "promises": {
       "Package": "promises",
       "Version": "1.2.0.1",
@@ -775,6 +788,17 @@
       ],
       "Hash": "4ab2c43adb4d4699cf3690acd378d75d"
     },
+    "ps": {
+      "Package": "ps",
+      "Version": "1.7.5",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "utils"
+      ],
+      "Hash": "709d852d33178db54b17c722e5b1e594"
+    },
     "purrr": {
       "Package": "purrr",
       "Version": "1.0.1",
@@ -789,6 +813,23 @@
         "vctrs"
       ],
       "Hash": "d71c815267c640f17ddbf7f16144b4bb"
+    },
+    "quarto": {
+      "Package": "quarto",
+      "Version": "1.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "jsonlite",
+        "later",
+        "processx",
+        "rmarkdown",
+        "rsconnect",
+        "rstudioapi",
+        "utils",
+        "yaml"
+      ],
+      "Hash": "298a252816cabed120391c955aced484"
     },
     "rappdirs": {
       "Package": "rappdirs",

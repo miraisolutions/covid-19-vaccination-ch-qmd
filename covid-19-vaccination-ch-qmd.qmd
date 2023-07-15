@@ -543,7 +543,7 @@ first.week.booster <- DataRoll4W100k %>%
 # override values for booster
 DataRoll4W100k <- DataRoll4W100k %>% mutate(Value = ifelse(Status == "Fully vac. Booster" & AsOfDate < as.character(first.week.booster), NA, Value))
 
-saveRDS(last_timeline_weeks, "www/bag_data/last_timeline_weeks.rds") 
+# saveRDS(last_timeline_weeks, "www/bag_data/last_timeline_weeks.rds") 
 
 ```
 

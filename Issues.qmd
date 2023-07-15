@@ -6,7 +6,7 @@ title: "Migration notes"
 
 With latest version of knitr and all packages we observed a problem with rendering plotly graphs.
 
-The 'yaml' package is required to parse dependencies within Quarto Markdown files. To be added to the ren project
+The 'yaml' package is required to parse dependencies within Quarto Markdown files. To be added to the renv project
 
 ## renv
 
@@ -26,6 +26,14 @@ The Quarto website is ultimately a static website - it won't be responding to us
 
 https://github.com/quarto-dev/quarto-cli/discussions/1561
 
+Shiny #| context: server does not pick the objects run the R chunks, 
+
+Trick: save them as rds in the project, read them
+Not a big speed issue, given that shinyapps.io will load the html file
+
+## Shinyapps.io 
+
+
 ## Good sources
 
 -   [R Quarto Tutorial -- How To Create Interactive Markdown Documents](https://r-craft.org/r-news/r-quarto-tutorial-how-to-create-interactive-markdown-documents/)
@@ -41,3 +49,41 @@ https://quarto.org/docs/blog/posts/2022-10-25-shinylive-extension/
 -   [ShinyApp QUarto blog](https://community.rstudio.com/t/shinyapp-in-quarto-blog/159319/2)
 
 https://jauntyjjs.github.io/Trelliscopejs_In_Quarto_Example/
+
+## Videos
+
+Why moving to Quarto
+https://www.youtube.com/watch?v=mGNW8jl7RMc
+
+1. Quarto offers many out of the box features, Rmarkdown must use extension packages
+
+2. Quarto is multi-language and multi engine, other languages can be used.
+
+3. Easy migration, easy compatibility with Markdown and Jupyther
+
+<!-- 4. On Shinyapps.io quarto renders the html file in the project, Rmarkdown renders the Rmd file and executes all the code, which makes it much faster to load in Quarto -->
+
+<!-- See log file Rmarkdown -->
+
+<!-- https://www.shinyapps.io/admin/#/application/5623831/logs -->
+
+<!-- See logfile Quarto -->
+
+<!-- https://www.shinyapps.io/admin/#/application/9456928/logs -->
+
+## 1.
+
+Features:
+
+Markdown: bookdown, blogdown, distill (science publish), xaringan (presentation)
+
+Quarto offers all, it contr
+no need to depend on these external packgaes
+
+## 1.
+
+
+
+
+
+
