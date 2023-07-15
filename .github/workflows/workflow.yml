@@ -53,6 +53,7 @@ jobs:
         # if: github.event_name == 'schedule'
         run: |
           # pkgload::load_all(export_all = TRUE, helpers = FALSE, attach_testthat = FALSE)
+          library(dplyr); library(jsonlite);
           sapply(file.path("R", list.files("R")), source)
           build_data()
         shell: Rscript {0}
