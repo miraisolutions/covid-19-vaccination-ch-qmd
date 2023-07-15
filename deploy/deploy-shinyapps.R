@@ -21,7 +21,7 @@ quarto::quarto_publish_app(
                            name = "covid-19-vaccination-ch-qmd", 
                            title = "Covid19 Vaccination CH",
                            account = "miraisolutions",
-                           render = "local"
+                           render = "server"
 )
 
 # unlink("index.Rmd")
