@@ -58,9 +58,9 @@ jobs:
           build_data()
         shell: Rscript {0}
 
-      - name: Install R CMD check
-        run: install.packages("rcmdcheck")
-        shell: Rscript {0}
+      # - name: Install R CMD check
+      #   run: install.packages("rcmdcheck")
+      #   shell: Rscript {0}
 
       # - name: Check package
       #   uses: r-lib/actions/check-r-package@v2

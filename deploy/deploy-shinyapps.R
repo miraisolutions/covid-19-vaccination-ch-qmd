@@ -16,12 +16,12 @@ rsconnect::setAccountInfo(
 #                    )
 
 quarto::quarto_publish_app(
-                            input = "Index.qmd",
+                            input = "covid-19-vaccination-ch-qmd.qmd",
                            server = "shinyapps.io", 
                            name = "covid-19-vaccination-ch-qmd", 
                            title = "Covid19 Vaccination CH",
                            account = "miraisolutions",
-                           render = "local"
+                           render = "server"
 )
 
 # unlink("index.Rmd")
