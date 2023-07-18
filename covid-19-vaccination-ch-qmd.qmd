@@ -19,9 +19,7 @@ format:
 
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+This is a Quarto Document.
 
 ```{r}
 #| echo: false
@@ -40,7 +38,6 @@ library(htmlTable)
 library(lubridate)
 library(shiny)
 library(rsconnect)
-library(magrittr)
 
 
 # we use a font size relative to the responsive body font size (em)
@@ -54,6 +51,7 @@ source("R/plots.R")
 source("R/build_data.R")
 source("R/utils_read.R")
 source("R/utils.R")
+
 
 ```
 

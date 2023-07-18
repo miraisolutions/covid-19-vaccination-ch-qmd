@@ -1,5 +1,10 @@
 project:
   title: "covid-19-vaccination-ch-qmd"
+  render:
+    - covid-19-vaccination-ch-qmd.qmd
+    - Tests.qmd
+    - Presentation.qmd
+    - shinyexample.qmd
 
 editor: visual
 

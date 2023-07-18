@@ -4,9 +4,49 @@ author: "Mirai Solutions"
 format: revealjs
 ---
 
-## Quarto
+## 
 
-Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+![Mirai Logo](img/mirai-solutions-logo-flyer.png){width=50%}
+
+- Zurich-based data science company founded in 2009
+- Interdisciplinary team of experienced software engineers, statisticians, quantitative analysts, economists and scientists
+- Delivering effective solutions to the financial services industry
+
+## More about Mirai Solutions
+
+**Services by Mirai Solutions:**
+
+- Data analytics & software development: from customer's needs to a prototype and to a productive implementation
+- IT architecture and design, project management
+- Training customized to your business case - technical and agile topics
+
+**Our links:**
+
+- website: https://mirai-solutions.ch
+- LinkedIn: [linkedin.com/.../mirai-solutions-gmbh](https://www.linkedin.com/company/mirai-solutions-gmbh/)
+- email: info@mirai-solutions.com
+- twitter: https://twitter.com/MiraiSolutions
+
+## Our presentation
+
+- Why is it worth moving from Rmarkdown to Quarto
+- The Rmarkdown Shiny app we want to migrate
+- Replication of the original app with Qmd report
+- Quarto project with a document, what have we lost?
+- Considerations
+
+## From Rmarkdwon to Quarto
+
+- Quarto offers many out of the box features, Rmarkdown must use extension packages
+- Quarto is multi-language and multi engine, other languages can be used. This fits quite well a company like Mirai Solutions
+- Easy migration, easy compatibility with Markdown and Jupyther, low effort
+
+
+
+
+
+
+
 
 ## Bullets
 

@@ -6,5 +6,9 @@
 .quarto
 rsconnect
 /.quarto/
-covid-19-vaccination-ch-qmd_files
-covid-19-vaccination-ch-qmd.html
+News.html
+html
+*_files/*
+*_files
+Tests.html
+*.html

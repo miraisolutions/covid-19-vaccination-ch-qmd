@@ -83,6 +83,7 @@ jobs:
         with:
           to: html # If set, it will be equivalent to `quarto render --to html`
           # path: source-folder # By default, the current working dir is used i.e `quarto render .`
+          # it runs also the test and the other documents
 
       - name: Deploy to shinyapps.io
         # Continuous deployment only for pushes to the main / master branch

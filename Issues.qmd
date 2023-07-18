@@ -33,6 +33,8 @@ Not a big speed issue, given that shinyapps.io will load the html file
 
 ## Shinyapps.io 
 
+The Qmd file cannot be in the INST folder, when deploying to Shinyapps.io 
+Sourcing R folders does not work.
 
 ## Good sources
 
