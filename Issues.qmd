@@ -26,15 +26,13 @@ The Quarto website is ultimately a static website - it won't be responding to us
 
 https://github.com/quarto-dev/quarto-cli/discussions/1561
 
-Shiny #| context: server does not pick the objects run the R chunks, 
+Shiny #\| context: server does not pick the objects run the R chunks,
 
-Trick: save them as rds in the project, read them
-Not a big speed issue, given that shinyapps.io will load the html file
+Trick: save them as rds in the project, read them Not a big speed issue, given that shinyapps.io will load the html file
 
-## Shinyapps.io 
+## Shinyapps.io
 
-The Qmd file cannot be in the INST folder, when deploying to Shinyapps.io 
-Sourcing R folders does not work.
+The Qmd file cannot be in the INST folder, when deploying to Shinyapps.io Sourcing R folders does not work.
 
 ## Good sources
 
@@ -52,16 +50,21 @@ https://quarto.org/docs/blog/posts/2022-10-25-shinylive-extension/
 
 https://jauntyjjs.github.io/Trelliscopejs_In_Quarto_Example/
 
+I'm an R user: Quarto or R Markdown?
+
+https://www.jumpingrivers.com/blog/quarto-rmarkdown-comparison/
+
+[Notes on Changing from Rmarkdown/Bookdown to Quarto](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/)
+
 ## Videos
 
-Why moving to Quarto
-https://www.youtube.com/watch?v=mGNW8jl7RMc
+Why moving to Quarto https://www.youtube.com/watch?v=mGNW8jl7RMc
 
-1. Quarto offers many out of the box features, Rmarkdown must use extension packages
+1.  Quarto offers many out of the box features, Rmarkdown must use extension packages
 
-2. Quarto is multi-language and multi engine, other languages can be used.
+2.  Quarto is multi-language and multi engine, other languages can be used.
 
-3. Easy migration, easy compatibility with Markdown and Jupyther
+3.  Easy migration, easy compatibility with Markdown and Jupyther
 
 <!-- 4. On Shinyapps.io quarto renders the html file in the project, Rmarkdown renders the Rmd file and executes all the code, which makes it much faster to load in Quarto -->
 
@@ -79,13 +82,6 @@ Features:
 
 Markdown: bookdown, blogdown, distill (science publish), xaringan (presentation)
 
-Quarto offers all, it contr
-no need to depend on these external packgaes
+Quarto offers all, it contr no need to depend on these external packgaes
 
 ## 1.
-
-
-
-
-
-

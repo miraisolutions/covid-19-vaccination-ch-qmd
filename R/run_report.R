@@ -11,25 +11,28 @@ data_path <- function() {
   # system.file("www/bag_data")
   "www/bag_data"
 }
-
-#' #' Run the Rmd report
-#' #'
-#' #' @param fetch_latest_data logical, if `TRUE` the data re-fetched from the BAG
-#' #'   source, otherwise data are read from the stored RDS files in
-#' #'   `www/bag_data`. Defaults to `TRUE`, `FALSE` can be used in local runs.
-#' #' @param render_args list, additional arguments to pass to
-#' #'   [rmarkdown::render()]
-#' #' @param shiny_args list, additional arguments to pass to [shiny::runApp()]
-#' #' @param auto_reload logical, additional argument to pass to
-#' #'   [rmarkdown::run()], If `TRUE` (the default), automatically reload the Shiny
-#' #'   application when the file currently being viewed is changed on disk.
-#' #' @export
-#' run_report <- function(fetch_latest_data = FALSE, render_args = NULL, auto_reload = TRUE,
-#'                        shiny_args = NULL) {
-#'   rmd_params <- list(fetch_latest_data = fetch_latest_data, use_pkgload = FALSE)
-#'   render_args$params <- c(render_args$params, rmd_params)
-#'   rmarkdown::run(file.path(report_path(), "index.Rmd"),
-#'                  render_args = render_args, auto_reload = auto_reload,
-#'                  shiny_args = shiny_args)
-#' }
+#' Run the qmd report
+#'
+#' @importFrom quarto quarto_run
+#' @export
+run_report <- function() {
+  # rmd_params <- list(fetch_latest_data = fetch_latest_data, use_pkgload = FALSE)
+  # render_args$params <- c(render_args$params, rmd_params)
+  # qmd_file <- file.path(report_path(), "index.qmd")
+  # quarto_render(qmd_file)
+  # shinyargs <- c(shiny_args, list(port = getOption("shiny.port"),
+  #                                 host = getOption("shiny.host", "127.0.0.1"), launch.browser = TRUE))
+  # shinyargs <- unique(shinyargs)
+  # # rmarkdown::run(file.path(report_path(), "index.Rmd"),
+  # #                render_args = render_args, auto_reload = auto_reload,
+  # #                shiny_args = shiny_args)
+  # restore <- Sys.getenv("RMARKDOWN_RUN_PRERENDER", unset = NA)
+  # Sys.setenv(RMARKDOWN_RUN_PRERENDER = "0")
+  # if (!is.na(restore)) {
+  #   on.exit(Sys.setenv(RMARKDOWN_RUN_PRERENDER = restore),
+  #           add = TRUE)
+  # }
+  # rmarkdown::run(qmd_file, shiny_args = shiny_args, auto_reload = auto_reload)
+  quarto::quarto_run(file.path(report_path(), "index.qmd"))
+}
 

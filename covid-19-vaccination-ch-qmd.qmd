@@ -174,7 +174,6 @@ datacases <- datacases %>%
 
 The current situation of the last 4 weeks as of **`r weeks_from_to[2]`**, i.e. how the infections, hospitalizations and deaths occurred across the age classes in absolute terms is shown below. Overall during this period Switzerland has registered [**`r .extract_value(datacases, "Infections")`**]{style="background-color: #dfc77f"} infections, [**`r .extract_value(datacases, "Hospitalizations")`**]{style="background-color: #dfc77f"} hospitalizations and [**`r .extract_value(datacases, "Deaths")`**]{style="background-color: #dfc77f"} deaths.
 
-@fig-cases see past 4 weeks cases-hospitalizations and deaths.
 
 ```{r }
 #| label: fig-cases
@@ -432,7 +431,8 @@ The estimate indicate that the "Unvaccinated" people have [**`r DataPlot100kScal
 
 Assuming there are 3 possible **Scenarios** to add to the current one: what if there had been no vaccinated at all this month? Or if we had been all vaccinated? What if all with Booster?
 
-These opposite scenarios can be generated and compared with what really happened in the last 4 weeks ("Current") by taking the *Hospitalization* and *Death* rates over 100'000 people of the unvaccinated ("No Vac.") and vaccinated ("Vac. Booster" / "Vac No Booster") populations and projecting them over the full population.
+These opposite scenarios can be generated and compared with what really happened in the last 4 weeks ("Curre
+nt") by taking the *Hospitalization* and *Death* rates over 100'000 people of the unvaccinated ("No Vac.") and vaccinated ("Vac. Booster" / "Vac No Booster") populations and projecting them over the full population.
 
 Worth mentioning that the protection given by the vaccines against infection is also to consider as source of bias in this scenario analysis:
 
