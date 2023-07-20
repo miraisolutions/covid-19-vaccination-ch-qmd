@@ -443,7 +443,8 @@ See the corresponding [github repository](https://github.com/miraisolutions/covi
 - Roxygen documentation missing
 - `renv` allowed
 - missing `DESCRIPTION` file
-- tests can be placed in a second `Tests.qmd` file to be rendered also in CI
+- tests can be placed in a second `Tests.qmd` file to be rendered also in CI (Render Quarto Project step)
+- GitHub actions to be updated removing package check
 
 See the app on [shinyapps.io](https://miraisolutions.shinyapps.io/covid-19-vaccination-ch-qmd/){target="_blank"}
 
@@ -451,12 +452,14 @@ See the app on [shinyapps.io](https://miraisolutions.shinyapps.io/covid-19-vacci
 
 ## Is it worth moving from Rmd to Qmd?
 
-It is definitely worth starting new projects and documents using Quarto, for the reasons mentioned above.
+Definitely worth starting new projects and documents using Quarto, for all the reasons mentioned.
 Presentations have more options with Quarto, and switching from HTML to PDF is easier.
 
 For applications similar to ours, Quarto is not adding benefits from the architecture point of view.
 
-Quarto allows however using more features in terms of layout, annotations, etc. therefore if you plan to develop an app farther and make it more user-friendly, Quarto can give more options.
+Quarto allows however using more features in terms of layout, annotations, etc. therefore if you plan to develop an app farther and make it more user-friendly, you can benefit from a move to Quarto.
+
+Pure R users do not have to be in a rush, however Quarto is likely to become the new standard.
 
 ## References
 
