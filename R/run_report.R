@@ -11,6 +11,10 @@ data_path <- function() {
   # system.file("www/bag_data")
   "www/bag_data"
 }
+data_path_qmd <- function() {
+  # system.file("www/bag_data")
+  "../../www/bag_data"
+}
 #' Run the qmd report
 #'
 #' @importFrom quarto quarto_run

@@ -1,12 +1,16 @@
 ---
 title: "Migrating a Shiny live dashboard from R Markdown to Quarto"
 author: "Mirai Solutions"
+subtitle: "R Basel 2023"
 #format: beamer
 format: 
   revealjs: 
     logo: img/mirai-solutions-logo-flyer.png
     footer: "Copyright Mirai Solutions"
-  beamer: default
+  beamer: 
+    pdf-engine: pdflatex
+    logo: img/mirai-solutions-logo-flyer.png
+    footer: "Copyright Mirai Solutions"
 date: 2023/07/21
 fontsize: 26pt
 execute: 
@@ -17,14 +21,15 @@ execute:
 knitr:
   opts_chunk: 
     collapse: true
-# margin-header: |
-#   ![Logo image](img/mirai-solutions-logo-flyer.png):
-data-background-opacity: "0.8"
+highlight-style: github
+output-dir: docs
+
 ---
 
 ## 
 
-![](img/mirai-solutions-logo-flyer.png){width=50%}
+![](img/mirai-solutions-logo-flyer.png){width=40%}
+
 
 - Zurich-based data science company founded in 2009
 - Interdisciplinary team of experienced software engineers, statisticians, quantitative analysts, economists and scientists
@@ -77,7 +82,7 @@ Some features:
 
 - based on R package `rmarkdown`
 
-Both Quarto and R Markdown are supported by the Posit RStudio IDE
+Both Quarto and R Markdown are supported by the Posit RStudio IDE.
 
 
 ## From R Markdwon to Quarto
@@ -88,11 +93,13 @@ Why migrating, main points.
 
 - Quarto is multi-language and multi engine, other languages like Python can be used. 
 
-- Easy migration, easy compatibility with Markdown and Jupyter, low effort (replace `rmd` with `qmd`)
+- Easy migration, compatibility with Markdown and Jupyter, low effort (replace `rmd` with `qmd`)
 
 - R Markdown is still suitable to R users, however Quarto is likely to be the next standards and to be developed more than R Markdown
 
-- Quarto has an easier way to handle configurations from `yml` file, and it is more flexible w.r.t. layout and output format.
+- Quarto has an easier way to handle configurations from `yml` file, standardized and flexible w.r.t. layout and output format.
+
+- Quarto has already some additional features, Tab panels, code highlighting, notations, freeze results etc.
 
 
 ## Quarto vs R Markdown - extensions
@@ -118,11 +125,13 @@ Quarto does not depend on R, unlike R Markdown, it can be called from other lang
 
 :::: {.columns}
 
+::: {.column width="10%"}
+
 ::: {.column width="50%"}
 Code of different languages can be used (R, Python, Javascript, Julia, flexible for future languages).   
 :::
 
-::: {.column width="50%"}
+::: {.column width="40%"}
 
 ![](img/Quarto-languages.jpg){width=105%}
 
@@ -261,16 +270,20 @@ We keep the same original structure and we try a 1 to 1 migration of the origina
 
 ## Migration from Rmd to Qmd
 
-The conversion is pretty easy, 
-
+- Update the `format` in the YAML and other options, set global options in `_quarto.yml`
 - rename the `Index.rmd` file into `Index.qmd`, or open a new `qmd` file.
-- clean up the chunks, removing the options and setting global options in `_quarto.yml` and document's options and parameters on top of the `qmd` documents (Yml section).
+
+```
+knitr::convert_chunk_header("inst/report/index.Rmd", 
+                          output = "inst/report/index.qmd")
+```
+- clean up the chunks
 
 ```
 ` `{r ageclasses-pandemic-month-calc, warning=FALSE, include=FALSE, cache=TRUE}`
 ```
 
-becomes
+Options are moved into the code using chunk `#|` 
 
 ```
 #| warning: false
@@ -282,15 +295,14 @@ No problems have been observed with plotly and html tables in a Quarto Document.
 
 ## Migration from Rmd to Qmd - shiny
 
-A careful update is required for reading shiny chunks.
-In R Markdown is sufficient to set `runtime: shiny(_prerendered)`.
+The integration of shiny content in Quarto and Markdown is quite similar.
 
-In Quarto we must declare the server side in the chunk option.
+Declare the server side in the chunk option.
 
 ```
 #| context: server
 ```
-Options for the layout can also be added
+Options for the layout can also be added (only Quarto)
 
 ```
 #| panel: sidebar
@@ -298,7 +310,16 @@ Options for the layout can also be added
 ## Code
 
 ```
-See problem with server chunk in example: `shinyexample.qmd`
+Options to be loaded in #| context: setup
+```
+#| context: server
+```
+Data to be made available in server must be loaded with #| context: data
+```
+#| context: data
+```
+See example: `shinyexample.qmd`
+
 
 ## Migration from Rmd to Qmd - shiny
 
@@ -323,9 +344,10 @@ output$distPlot <- renderPlot({
 
 ## Migration from Rmd to Qmd - shiny
 
-Example in line with our app, first some data preparation
+Example in line with our app, where we first have some data preparation
 
 ```
+#| context: data
 data_old_faith <- faithful[, 2]
 ```
 ```
@@ -343,37 +365,13 @@ output$distPlot <- renderPlot({
         main = 'Histogram of waiting times')
 })
 ```
-Here the code will fail to find `data_old_faith`, the `#| context: server` opens a new R process that does not know what was executed before.
+Without #| context: data, the code will fail to find `data_old_faith`, the `#| context: server` opens a new R process that does not know what was executed before.
 
-## Migration from Rmd to Qmd - shiny
-
-Work around: save the data and load them in server.
-
-```
-data_old_faith <- faithful[, 2]
-saveRDS(data_old_faith, "data_old_faith.rds")
-```
-```
-sliderInput("bins", "Number of bins:", 
-            min = 1, max = 50, value = 30)
-plotOutput("distPlot")
-```
-```
-#| context: server
-data_old_faith <- readRDS("data_old_faith.rds")
-output$distPlot <- renderPlot({
-   x <- data_old_faith[, 2]  # Old Faithful Geyser data from first chunk
-   bins <- seq(min(x), max(x), length.out = input$bins + 1)
-   hist(x, breaks = bins, col = 'darkgray', border = 'white',
-        xlab = 'Waiting time to next eruption (in mins)',
-        main = 'Histogram of waiting times')
-})
-```
 ## Migration from Rmd to Qmd - CI CD
 
 Few modifications are required in the `worflow.yml`, making use of [quarto actions](https://github.com/quarto-dev/quarto-actions)
 
-Before deploying to shinyapps.io Quarto must be installed.
+Prior to deploying to shinyapps.io Quarto must be installed.
 ```
 - name: Install Quarto
   uses: quarto-dev/quarto-actions/setup@v2
@@ -399,7 +397,7 @@ quarto::quarto_publish_app(
 - Easy migrations from rmd to qmd
 - Adjustments in GitHub actions required
 - Update in deploy script
-- Issue with embedding a shiny app in a code chunk is solved with a work around
+- Care required for the shiny content
 
 The last issue is the only relevant one encountered. It could give problems for documents and presentations that contain many different examples of shiny apps.
 A suggested 

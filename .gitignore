@@ -12,3 +12,6 @@ html
 *_files
 Tests.html
 *.html
+docs
+covid-19-vaccination-ch-qmd_data
+shinyexample_data

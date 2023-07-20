@@ -56,6 +56,10 @@ https://www.jumpingrivers.com/blog/quarto-rmarkdown-comparison/
 
 [Notes on Changing from Rmarkdown/Bookdown to Quarto](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/)
 
+[FAQ for R Markdown users](https://quarto.org/docs/faq/rmarkdown.html)
+
+https://laderast.github.io/qmd_rmd/#/what-is-quarto-1
+
 ## Videos
 
 Why moving to Quarto https://www.youtube.com/watch?v=mGNW8jl7RMc
