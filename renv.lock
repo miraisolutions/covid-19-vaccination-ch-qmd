@@ -196,35 +196,6 @@
       "Repository": "CRAN",
       "Hash": "d691c61bff84bd63c383874d2d0c3307"
     },
-    "covid19vaccinationch": {
-      "Package": "covid19vaccinationch",
-      "Version": "1.1.1",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "covid19-vaccination-ch",
-      "RemoteUsername": "miraisolutions",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "e619bc5c0c34c98477b92a9954e051cdcf0b1fdd",
-      "Requirements": [
-        "DT",
-        "R",
-        "dplyr",
-        "ggplot2",
-        "htmlTable",
-        "jsonlite",
-        "lubridate",
-        "pkgload",
-        "plotly",
-        "rmarkdown",
-        "scales",
-        "shiny",
-        "stringr",
-        "tidyr",
-        "tidyselect"
-      ],
-      "Hash": "46972b5d66f2346ce797922c42874b3e"
-    },
     "cpp11": {
       "Package": "cpp11",
       "Version": "0.4.4",

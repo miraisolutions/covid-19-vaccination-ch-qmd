@@ -1,0 +1,86 @@
+\usepackage{etoolbox}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+
+\usepackage{scrextend}
+\changefontsizes[14pt]{10pt}
+
+% Support for multi-column output
+\newcommand{\columnsbegin}{\begin{columns}}
+\newcommand{\columnsend}{\end{columns}}
+\newcommand{\solutionsbegin}{\begin{solutions}}
+\newcommand{\solutionsend}{\end{solutions}}
+
+% Decreasing space between commands and output in knitr chunks
+% See http://stackoverflow.com/questions/34866163/decreasing-space-between-commands-and-output-in-knitr-chunks
+% \setlength{\parskip}{0pt}
+% \setlength{\OuterFrameSep}{0pt}
+\makeatletter
+\preto{\@verbatim}{\topsep=0pt \partopsep=0pt }
+\setlength{\metropolis@titleseparator@linewidth}{2pt}
+\setlength{\metropolis@progressonsectionpage@linewidth}{2pt}
+\setlength{\metropolis@progressinheadfoot@linewidth}{2pt}
+\setlength{\metropolis@frametitle@padding}{2.2ex}
+
+% Custom header
+% https://tex.stackexchange.com/questions/477777/progress-bar-in-custom-frame-title-in-metropolis-theme-beamer
+\setbeamertemplate{frametitle}{
+  \nointerlineskip
+  \begin{beamercolorbox}[
+      wd=\paperwidth,
+      sep=0pt,
+      leftskip=\metropolis@frametitle@padding,
+      rightskip=\metropolis@frametitle@padding,
+    ]{frametitle}
+  \metropolis@frametitlestrut@start
+  \insertframetitle
+  \nolinebreak
+  \metropolis@frametitlestrut@end
+  \hfill
+  \includegraphics[height=3ex, keepaspectratio, valign=c]{icon_blue.png}
+  \end{beamercolorbox}
+  \usebeamertemplate*{progress bar in head/foot}
+}
+
+\makeatother
+
+% Include logo
+\titlegraphic{\hfill\includegraphics[width=4cm, trim=100 1500 860 360, clip]{mirai-solutions.pdf}}
+
+% Define Mirai blue
+\definecolor{mirai}{rgb}{0.243,0.565,0.804}
+\definecolor{bggray}{rgb}{0.95,0.95,0.95}
+
+% bla
+%\setbeamercolor{palette primary}{bg=rugred,fg=white}
+%\setbeamercolor{frametitle}{bg=red}
+
+% Set progress bar
+%\metroset{progressbar=frametitle}
+\setbeamercolor{progress bar}{fg=mirai,bg=mLightBrown}
+
+% Set color background
+\setbeamercolor{background canvas}{bg=bggray}
+\def\opacity{0}
+% Code hoghlight defined in the YAML header. Options are:
+% “default”, “tango”, “pygments”, “kate”, “monochrome”, “espresso”, “zenburn”, “haddock”
+
+% Define colors
+\hypersetup{colorlinks,citecolor=mirai,filecolor=mirai,linkcolor=mirai,urlcolor=mirai}
+
+% Define custom footer including copyright notice
+\setbeamertemplate{footline}[text line]{\parbox{\linewidth}{\vspace*{-16pt}Mirai Solutions GmbH, 2023\hfill\insertframenumber/\inserttotalframenumber}}
+
+% Lift footnote up to give the footline more space
+\addtobeamertemplate{footnote}{}{\vspace{3ex}}
+
+% tikz style to draw a box
+\tikzstyle{box}=[draw, minimum size=2em]
+
+% Presenter notes
+% \setbeameroption{hide notes}
+% \setbeameroption{show notes}
+\setbeameroption{hide notes}
+
+% caption font
+\setbeamerfont{caption}{size=\tiny}

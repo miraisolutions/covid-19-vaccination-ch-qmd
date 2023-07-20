@@ -46,7 +46,7 @@ The Qmd file cannot be in the INST folder, when deploying to Shinyapps.io Sourci
 
 https://quarto.org/docs/blog/posts/2022-10-25-shinylive-extension/
 
--   [ShinyApp QUarto blog](https://community.rstudio.com/t/shinyapp-in-quarto-blog/159319/2)
+-   [ShinyApp Quarto blog](https://community.rstudio.com/t/shinyapp-in-quarto-blog/159319/2)
 
 https://jauntyjjs.github.io/Trelliscopejs_In_Quarto_Example/
 

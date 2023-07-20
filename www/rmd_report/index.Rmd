@@ -27,9 +27,9 @@ load_pkg_c19 <- function(usepkgload) {
   if (usepkgload) {
     pkgload::load_all(export_all = FALSE, helpers = FALSE, attach_testthat = FALSE)
   }
-  if (!("covid19vaccinationch" %in% search())) {
-    library(covid19vaccinationch)
-  }
+  # if (!("covid19vaccinationch" %in% search())) {
+  #   library(covid19vaccinationch)
+  # }
   NULL
 }
 

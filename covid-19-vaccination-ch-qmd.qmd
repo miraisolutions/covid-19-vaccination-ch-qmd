@@ -4,13 +4,12 @@ params:
   fetch_latest_data: FALSE
   use_pkgload: TRUE 
 server: shiny
-freeze: false
+freeze: auto
 format:
   html:
     # theme: 
     #   light: cerulean 
     #   dark: cyborg
-    css: styles.css
     toc: true
     toc-depth: 3
     toc-location: left
@@ -34,12 +33,10 @@ library(tidyr)
 library(stringr)
 library(ggplot2)
 library(plotly)
-library(tidyselect)
 library(scales)
 library(htmlTable)
 library(lubridate)
 library(shiny)
-library(rsconnect)
 
 
 # we use a font size relative to the responsive body font size (em)
@@ -176,11 +173,17 @@ datacases <- datacases %>%
 
 The current situation of the last 4 weeks as of **`r weeks_from_to[2]`**, i.e. how the infections, hospitalizations and deaths occurred across the age classes in absolute terms is shown below. Overall during this period Switzerland has registered [**`r .extract_value(datacases, "Infections")`**]{style="background-color: #dfc77f"} infections, [**`r .extract_value(datacases, "Hospitalizations")`**]{style="background-color: #dfc77f"} hospitalizations and [**`r .extract_value(datacases, "Deaths")`**]{style="background-color: #dfc77f"} deaths.
 
+To account for different distribution of the population in the Age Classes consider the **Incidence over 100'000** inhabitants:
 
+::: {.panel-tabset}
+
+### Absolute
 ```{r }
 #| label: fig-cases
 #| fig-cap: "Positive, hospitalized and dead cases in the last 4 weeks."
 #| warning: false
+#| fig-alt: "Positive, hospitalized and dead cases in the last 4 weeks."
+
 datacasesAges = datacases %>%
     filter(!AgeClass %in% c("All"))
 
@@ -188,13 +191,14 @@ plotcol <- pick_vac_lev_col("not_vaccinated")
 BarplotCovid(datacasesAges, g_palette = plotcol, X = "AgeClass", FACET = "Case", percent = FALSE)
 
 ```
-
-To account for different distribution of the population in the Age Classes consider the **Incidence over 100'000** inhabitants:
+### Over 100K
 
 ```{r}
 #| label: fig-cases-100k
 #| fig-cap: "Positive, hospitalized and dead cases in the last 4 weeks over 100k."
 #| warning: false
+#| fig-alt: "Positive, hospitalized and dead cases in the last 4 weeks over 100k."
+
 datacases100k <- datacases %>%  mutate(Value = Value / pop * 100000)
 
 # plotcol <- c(rep(pick_vac_lev_col("not_vaccinated"), length(unique(ageclassMap$AgeClass))), "firebrick4")
@@ -203,6 +207,7 @@ plotcol <- pick_vac_lev_col("not_vaccinated")
 BarplotCovid(datacases100k, g_palette = plotcol,
              X = "AgeClass", FACET = "Case", percent = FALSE)
 ```
+:::
 
 *Infections* happen more frequently in younger age classes (at least in absolute terms) while *Hospitalizations* and *Deaths* are more common among the older ones.
 
@@ -239,8 +244,9 @@ datavacall <- datavacc %>% filter(AgeClass == "All") %>%
 
 ```{r }
 #| label: fig-vac-status
-#| fig-cap: "Current vaccination status"
+#| fig-cap: "Current vaccination status."
 #| warning: false
+#| fig-alt: "Current vaccination status."
 plotcol <- pick_vac_lev_col(c("partially_vaccinated", "fully_vaccinated_no_booster", "fully_vaccinated_first_booster"))
 plotly_out <- StackedBarplotCovid(datavacc, g_palette = c(plotcol), X = "AgeClass", FILL = "Status", 
              position  = "stack", title = "Vaccination Status per age", percent = TRUE)
@@ -315,8 +321,9 @@ DataTab <- DataPlot %>%
 
 ```{r}
 #| label: fig-vac-breakthrough
-#| fig-cap: "Last 4 weeks vaccination breakthroughs"
+#| fig-cap: "Last 4 weeks vaccination breakthroughs."
 #| warning: false
+#| fig-alt: "Last 4 weeks vaccination breakthroughs."
 .calc_perc_unknwon <- function(data, case) {
   perc <- (data %>% filter(Case == case & vaccination_status == "Unknown" & AgeClass == "All") %>% .[,"Value"] / data %>% filter(Case == case & AgeClass == "All") %>% summarize(totcases = sum(Value)) %>% .[, "totcases"]) %>% as.data.frame() %>% .[, "Value"]
   paste(round(perc * 100,1), "%")
@@ -333,9 +340,6 @@ StackedBarplotCovid(DataPlotTab1, X = "AgeClass", FILL = "Status", FACET = "Case
 Overall the vaccination status is "Unknown" for **`r .calc_perc_unknwon(DataPlot, "Hospitalizations")`** of the *Hospitalized* and for **`r .calc_perc_unknwon(DataPlot, "Deaths")`** of the *Deaths*.
 
 ```{r}
-# DataTab = DataPlot %>%
-#   rename(Status = vaccination_status) %>%
-#   rename(value = Value)
 
 DataTab %>%
   filter(!Case %in% c("Infections")) %>%
@@ -382,7 +386,11 @@ DataTabScale %>%
 After this reallocation let's look at the records **over 100'000 people** in each reference Age Class and vaccination status, and at the ratio between the "Unvaccinated" and "Vaccinated" cases. This view will be used also in the following sections. When accounting for the total, i.e. "All" Age Class, age adjusted figures have been computed accounting for the different distribution of the "Vaccinated" and "Unvaccinated" groups across the different Age Classes.
 
 ```{r}
-
+#| label: fig-vac-breakthrough-100K
+#| fig-cap: "Last 4 weeks vaccination breakthroughs Vac vs Unvac over 100k."
+#| warning: false
+#| fig-alt: "Last 4 weeks vaccination breakthroughs Vac vs Unvac over 100k."
+#| 
 # scale to 100k
 DataPlot100kScale <- make_100k(DataTabScale %>% rename(Value = value), 
                                by = c("AsOfDate","AgeClass", "Status"), status = "Status")
@@ -396,6 +404,11 @@ StackedBarplotCovid(DataPlot100kScale2, X = "AgeClass", FILL = "Status", FACET =
 The ratio of the impact **per 100'000 people** of the "Fully Vaccinated" vs the "Unvaccinated" measures the vaccination effect and the risk of *Hospitalization* or *Death* of the "Unvaccinated" versus the "Vaccinated".
 
 ```{r}
+#| label: fig-vac-hosp-100K
+#| fig-cap: "Last 4 weeks Hosp. Deaths Vac vs Unvac over 100k."
+#| warning: false
+#| fig-alt: "Last 4 weeks Hosp. Deaths Vac vs Unvac over 100k."
+
 DataPlot100kScaleRatios <- calc_ratio_fullyvac(DataPlot100kScale) %>%
   filter(Status %in% names(vac_levels())[grep("fully", vac_levels())])
 
@@ -443,10 +456,16 @@ Worth mentioning that the protection given by the vaccines against infection is 
 
 Despite the decay of vaccination benefits over time and against infections (Omicron), this is still a factor to consider.
 
-The Incidence over 100'000 people in the 3 scenarios + "Current" are presented below:
+The Incidence over 100'000 people in the 3 scenarios + "Current" are presented below, and more importantly, projecting the values of the 3 scenarios on the whole population we can evaluate the vaccination impact in absolute terms.
 
+::: {.panel-tabset}
+
+### Over 100 K
 ```{r}
-
+#| label: fig-vac-hosp-scen-100K
+#| fig-cap: "Last 4 weeks Hosp. Deaths Vac vs Unvac Scenarios over 100k."
+#| warning: false
+#| fig-alt: "Last 4 weeks Hosp. Deaths Vac vs Unvac Scenarios over 100k."
 datacases100k = datacases100k %>% mutate(Status = "current")
 
 DataPlot100kp = DataPlot100kScale %>%
@@ -466,10 +485,13 @@ StackedBarplotCovid(DataPlot100kp, X = "AgeClass", FILL = "Status", FACET = "Cas
 
 ```
 
-More importantly, projecting the values of the 3 scenarios on the whole population we can evaluate the vaccination impact in absolute terms.
+### Projection
 
 ```{r}
-
+#| label: fig-vac-hosp-scen
+#| fig-cap: "Last 4 weeks Hosp. Deaths Vac vs Unvac Scenarios projections."
+#| warning: false
+#| fig-alt: "Last 4 weeks Hosp. Deaths Vac vs Unvac Scenarios projections."
 DataPlotp = DataPlot100kp %>%
   select(-pop) %>%
   left_join(Pop, by = c(c("AsOfDate", "AgeClass"))) %>%
@@ -486,6 +508,7 @@ StackedBarplotCovid(DataPlotpTab7, X = "AgeClass", FILL = "Status", FACET = "Cas
              title = "Hosp. and Deaths for each scenarios")
 
 ```
+:::
 
 ```{r}
 
@@ -571,14 +594,16 @@ fluidRow(
 )
 data1 <- DataRoll4W100k %>% filter(AsOfDate %in% last_timeline_weeks)
 
-saveRDS(data1, "www/bag_data/data1.rds") 
-
 ```
 
 
 
 ```{r }
 #| context: server
+#| label: fig-vac-hosp-impact-age
+#| fig-cap: "Last 4 weeks Impact Hosp. Deaths Vac vs Unvac per age class."
+#| warning: false
+#| fig-alt: "Last 4 weeks Impact Hosp. Deaths Vac vs Unvac per age class."
 
 output$lineplot1 <- plotly::renderPlotly({
       
@@ -617,7 +642,6 @@ DataRoll4W100kratio <- left_join(DataRoll4W100kVac, DataRoll4W100kUnVac, by = c(
 
 status2 <- names(vac_levels())[grep("fully", vac_levels())]
 data2 <- DataRoll4W100kratio %>% filter(AsOfDate %in% last_timeline_weeks)
-# saveRDS(data2, "www/bag_data/data2.rds") 
 
 #UI
 fluidRow(
@@ -641,6 +665,10 @@ plotly::plotlyOutput("lineplot2")
 
 ```{r lineplot2_output_plot}
 #| context: server 
+#| label: fig-vac-hosp-impact-ratio-age
+#| fig-cap: "Last 4 weeks Ratio Hosp. Deaths Vac vs Unvac per age class."
+#| warning: false
+#| fig-alt: "Last 4 weeks Ratio Hosp. Deaths Vac vs Unvac per age class."
 
 output$lineplot2 <- plotly::renderPlotly({
       if (is.null(input$case2))
@@ -676,4 +704,4 @@ Similar results about the benefits of vaccination are available from other count
 
 If you have any question about the approach, or any suggestion for improvement please do not hesitate to get in [touch](https://mirai-solutions.ch/about/contact/){target="_blank"}, we would love to hear from you as we may publish further updates to this article.
 
-This page article aims also at showing how an **R Markdown** file can be deployed to **shinyapps.io** to be a live page. For details on the architecture of the **covid19vaccinationch** R package that supports this deployment and its installation see the [README](https://github.com/miraisolutions/covid19-vaccination-ch#readme){target="_blank"} on our public **GitHub** repository or read the related [**news post**](https://mirai-solutions.ch/news/2022/03/08/announce-covid19-vaccination-ch/){target="_blank"} where we described it more in details.
+This page article aims also at showing how an **Quarto** file can be deployed to **shinyapps.io** to be a live page. For details on the architecture of the **covid19vaccinationch** R package that supports this deployment and its installation see the [README](https://github.com/miraisolutions/covid19-vaccination-ch#readme){target="_blank"} on our public **GitHub** repository or read the related [**news post**](https://mirai-solutions.ch/news/2022/03/08/announce-covid19-vaccination-ch/){target="_blank"} where we described it more in details.
