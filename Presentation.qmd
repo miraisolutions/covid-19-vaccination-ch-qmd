@@ -6,8 +6,11 @@ format:
   revealjs: 
     logo: img/mirai-solutions-logo-flyer.png
     footer: "Copyright Mirai Solutions"
+    slide-number: true
     fontsize: 25pt
     css: styles.css
+    menu: 
+      numbers: true
   beamer: 
     theme: metropolis
     include-in-header:
@@ -31,6 +34,7 @@ knitr:
     collapse: true
 highlight-style: github
 output-dir: docs
+incremental: false
 
 ---
 
@@ -79,7 +83,7 @@ output-dir: docs
 
 ## Quarto
 
-An open-source scientific and technical publishing system built on **Pandoc**. Quarto documents are authored using markdown, an easy way to write plain text format.
+An open-source scientific and technical publishing system built on **Pandoc**. Quarto Documents are authored using markdown, an easy way to write plain text format.
 
 Some features:
 
@@ -105,19 +109,19 @@ Both Quarto and R Markdown are supported by the Posit RStudio IDE.
 Quarto is easier to use outside RStudio.
 
 
-## From R Markdwon to Quarto
+## Why from R Markdwon to Quarto
 
 - Quarto offers many out of the box features (website, blogs, etc.), R Markdown must use extension R packages
 
-- Quarto is multi-language and multi engine, other languages like Python can be used
+- Quarto is multi-language and multi engine
 
 - Easy migration, compatibility with Markdown and Jupyter, low effort (replace `rmd` with `qmd`)
 
-- R Markdown is still suitable to R users, however Quarto is likely to be the next standards and to be developed more than R Markdown
+- R Markdown is still suitable to R users, however Quarto is likely to be the next standard and focus
 
-- Quarto has an easier way to handle configurations from `YAML` file, standardized and flexible w.r.t. layout and output format
+- Quarto handles configurations from `YAML` file, standardized and flexible w.r.t. layout and output format
 
-- Quarto has already some additional features: tab panels, code highlighting, notations, freeze results etc. It has many [templates available](https://github.com/mcanouil/awesome-quarto#templates){target="_blank"}.
+- Quarto's additional features: tab panels, code highlighting, notations, freeze results etc. Many layout-specific [templates available](https://github.com/mcanouil/awesome-quarto#templates){target="_blank"}.
 
 
 ## Quarto vs R Markdown - extensions
@@ -164,7 +168,7 @@ Quarto supported engines: `knitr`, `Jupyter`, `Observable`.
 
 Some other benefits from Quarto in styling and layout:
 
-- `yml` files can be configured at project level (`_quarto.yml`) or for single documents, options are available where R code was required 
+- `yml` options are available where R code was required 
 
 ```
 execute:
@@ -175,11 +179,11 @@ vs
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-- It facilitates the use of content across multiple documents, easier to handle than [R Markdown child-documents](https://bookdown.org/yihui/rmarkdown-cookbook/child-document.html){target="_blank"}.
+- Easier use of content across multiple documents, vs [R Markdown child-documents](https://bookdown.org/yihui/rmarkdown-cookbook/child-document.html){target="_blank"}.
 
-- More options already for styling your documents, easier to use.
+- More options already for styling your documents in the `qmd`.
 
-- Easier conversion from html to pdf and output format switch. Multiple formats can be specified from Quarto 1.3.
+- Easier format conversion (e.g. from html to pdf). Multiple formats can be specified from `Quarto 1.3`.
 
 # Our app: an R Markdown live article
 
@@ -193,7 +197,7 @@ Developed during the pandemic with the goal to provide a dashboard article analy
 
 The report compares *Vaccinated* and *Unvaccinated* populations and verifies differences in the impact of *Deaths* and *Hospitalized* figures.
 
-The app is visible in our [gallery](https://mirai-solutions.ch/gallery/covid19-vaccination-ch/){target="_blank"}
+The app is visible in our [gallery](https://mirai-solutions.ch/gallery/covid19-vaccination-ch/){target="_blank"}.
 
 ::: aside
 BAG stopped providing data in September 2022, the article is currently frozen with no data updates. 
@@ -218,7 +222,7 @@ It incorporates all the benefits of an R package in terms of robustness, deploym
 
 ## Technical features (2)
 
-Every Tuesday, through the GitHub Actions [workflow]((https://github.com/miraisolutions/covid19-vaccination-ch/blob/main/.github/workflows/workflow.yml){target="_blank"}), the app fetched data from BAG and re-built the datasets stored as `.rds` in the `inst` folder.
+Every Tuesday, via GitHub Actions [workflow](https://github.com/miraisolutions/covid19-vaccination-ch/blob/main/.github/workflows/workflow.yml){target="_blank"}, the app fetched BAG data and re-built the datasets stored as `.rds` in the `inst` folder.
 
 ```
 on
@@ -283,19 +287,19 @@ Ideally we would like to maintain all these features.
 
 What solution to use:
 
-- the Quarto website and blog is ultimately [a static website](https://github.com/quarto-dev/quarto-cli/discussions/1561)
-- interactive graphs and tables can be shown only in a Document
-- Quarto documents that include shiny components require an R session as a backend
-- hosting services like `quarto-pub`, `netlify`, and `gh-pages` serve the html pages of the site, not running the R code necessary to operate the shiny app.
+- The Quarto website and blog is ultimately [a static website](https://github.com/quarto-dev/quarto-cli/discussions/1561)
+- Quarto Documents support interactive graphs and tables
+- Quarto Documents with shiny components require an R session as a backend
+- Hosting services like `quarto-pub`, `netlify`, and `gh-pages` serve the html pages of the site, not running the R code necessary to operate the shiny app.
 
 We keep the same original structure and we try a 1 to 1 migration of the original app, keeping the deployment on **shinyapps.io**
 
-[https://github.com/miraisolutions/covid-19-vaccination-ch-qmd-pkg](https://github.com/miraisolutions/covid-19-vaccination-ch-qmd-pkg){target="_blank"}
+[https://github.com/miraisolutions/covid19-vaccination-ch-qmd-pkg](https://github.com/miraisolutions/covid19-vaccination-ch-qmd-pkg){target="_blank"}
 
 ## Migration from Rmd to Qmd
 
 - Update the `format` in the YAML and other options, set global options in `_quarto.yml`
-- rename the `Index.rmd` file into `Index.qmd`, or open a new `qmd` file.
+- rename the `index.rmd` file into `index.qmd`, or open a new `qmd` file.
 
 ```{r}
 #| echo: true
@@ -338,7 +342,7 @@ Options for the layout can also be added (only Quarto)
 ```
 Options to be loaded in `#| context: setup`
 ```
-#| context: server
+#| context: setup
 ```
 Data to be made available in server must be loaded with `#| context: data`
 ```
@@ -397,15 +401,15 @@ Without `#| context: data`, the code in `#| context: server` will fail to find `
 
 ## Migration from Rmd to Qmd - CI CD
 
-Few modifications are required in the `worflow.yml`, making use of [quarto actions](https://github.com/quarto-dev/quarto-actions){target="_blank"}
+Modifications in the [`worflow.yml`](https://github.com/miraisolutions/covid19-vaccination-ch-qmd-pkg/blob/main/.github/workflows/workflow.yml): use [quarto actions](https://github.com/quarto-dev/quarto-actions){target="_blank"}.
 
-Prior to deploying to shinyapps.io Quarto must be installed.
+Install Quarto prior to deploying to **shinyapps.io**:
 ```
 - name: Install Quarto
   uses: quarto-dev/quarto-actions/setup@v2
 ```
 
-Also the deploy script is updated, the quarto deploy function can be used
+Update the deploy script, use the quarto deploy function (`quarto_publish_app`):
 
 ```{r}
 #| echo: true
@@ -420,33 +424,33 @@ quarto::quarto_publish_app(
   render = "local" # to render before deployment
 )
 ```
-## Conclusions
+## Conclusions - 1 to 1 Migration
 
-- Easy migrations from `rmd` to `qmd`
-- package structure could be maintained
-- Adjustments in GitHub actions required
-- Update in deploy script, deployment with `quarto_publish_app`
+- Easy change from `rmd` to `qmd`
+- Package structure could be maintained
+- Adjustments in GitHub actions required (quarto actions)
+- Update in deployment script, function `quarto_publish_app`
 - Care required for the shiny content
-- shinyapps.io the only solution for publishing interactive documents
+- **shinyapps.io** or **Posit Connect** the solutions for publishing interactive documents
 
-The [shiny app](https://miraisolutions.shinyapps.io/covid-19-vaccination-ch-qmd-pkg/){target="_blank"} on shinyapps.io. A table of contents appears.
+The [shiny app](https://miraisolutions.shinyapps.io/covid-19-vaccination-ch-qmd-pkg/){target="_blank"} on **shinyapps.io**.
 
 # Alternative
 
 ## A Quarto project
 
-The application port is an R package, what if we try with a Quarto project.
+The application port is an R package, what if we try with a Quarto project?
 
 See the corresponding [github repository](https://github.com/miraisolutions/covid-19-vaccination-ch-qmd){target="_blank"}
 
-- Files to be sourced
-- Roxygen documentation missing
+- R scripts sourced (`source("R/")`)
+- Roxygen manual missing
 - `renv` allowed
-- missing `DESCRIPTION` file
-- tests can be placed in a second `Tests.qmd` file to be rendered also in CI (Render Quarto Project step)
-- GitHub actions to be updated removing package check
+- Missing `DESCRIPTION` file
+- Tests in a separate `Tests.qmd` file, rendered also in CI ('Render Quarto Project' step)
+- [GitHub Actions](https://github.com/miraisolutions/covid-19-vaccination-ch-qmd/actions) updated removing package check (`renv` step stays)
 
-See the app on [shinyapps.io](https://miraisolutions.shinyapps.io/covid-19-vaccination-ch-qmd/){target="_blank"}
+See the app on [**shinyapps.io**](https://miraisolutions.shinyapps.io/covid-19-vaccination-ch-qmd/){target="_blank"} with plots grouped in tabs.
 
 # Final Remarks
 
@@ -463,19 +467,16 @@ Pure R users do not have to be in a rush, however Quarto is likely to become the
 
 ## References
 
-- [Mirai Solutions Technical Guidesl](https://mirai-solutions.ch/techguides/){target="_blank"} on `Renv`, GitHub Actions CI-CD, roxygen2.
-- Example Shiny package with CI-CD on Mirai Repo:
-  https://github.com/miraisolutions/ShinyCICD
-- [Quarto Interactivity - Shiny](https://quarto.org/docs/interactive/shiny/){target="_blank"}
+- [Mirai Solutions Technical Guides](https://mirai-solutions.ch/techguides/){target="_blank"} on `Renv`, GitHub Actions CI-CD, roxygen2.
+- Example Shiny package with CI-CD on [Mirai Repo](https://github.com/miraisolutions/ShinyCICD):
+- From Quarto's documentation, [Interactivity - Shiny](https://quarto.org/docs/interactive/shiny/){target="_blank"}
 - [R Quarto Tutorial -- How To Create Interactive Markdown Documents](https://r-craft.org/r-news/r-quarto-tutorial-how-to-create-interactive-markdown-documents/){target="_blank"}
-- [ShinyApp Quarto blog](https://community.rstudio.com/t/shinyapp-in-quarto-blog/159319/2){target="_blank"} How to make a shinyapp as a blog post in quarto blog
-- [Quarto or R Markdown](https://www.jumpingrivers.com/blog/quarto-rmarkdown-comparison/){target="_blank"} Article on differences
+- [ShinyApp Quarto blog](https://community.rstudio.com/t/shinyapp-in-quarto-blog/159319/2){target="_blank"}, how to make a shinyapp as a blog post in quarto blog
+- [Quarto or R Markdown](https://www.jumpingrivers.com/blog/quarto-rmarkdown-comparison/){target="_blank"}, article on differences
 - [Quarto FAQ for R Markdown users](https://quarto.org/docs/faq/rmarkdown.html){target="_blank"}
 - [Engineering Shiny deploy chapter](https://engineering-shiny.org/deploy.html){target="_blank"}
 
 
 # Thank you!
-
-
 
 
