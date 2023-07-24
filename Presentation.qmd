@@ -17,7 +17,7 @@ format:
       - header.tex
     monofont: 'Source Code Pro'
     monofontoptions: 
-      - Scale=0.55
+      - Scale=0.6
 date: 2023/07/21
 date-format: |
   | MMMM D, YYYY

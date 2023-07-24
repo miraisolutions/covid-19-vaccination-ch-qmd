@@ -14,11 +14,9 @@ Source:
 
 https://community.rstudio.com/t/possibility-to-specify-renv-for-quarto-render/161423
 
-renv can be added, the DESCRIPTION file can be first be in the project to allow renv::restore()
+  `renv` can be added, the DESCRIPTION file can be first placed in the project to allow renv::restore()
 
-We could use the same set up as for the old app:
-
-R. 4.2.1 Same renv.lock file.
+Update to `R 4.3.0`, update of renv lock.
 
 ## Shiny
 
@@ -28,11 +26,12 @@ https://github.com/quarto-dev/quarto-cli/discussions/1561
 
 Shiny #\| context: server does not pick the objects run the R chunks,
 
-Trick: save them as rds in the project, read them Not a big speed issue, given that shinyapps.io will load the html file
+Use #\| context: data 
 
 ## Shinyapps.io
 
-The Qmd file cannot be in the INST folder, when deploying to Shinyapps.io Sourcing R folders does not work.
+The Qmd file cannot be in the INST folder, when deploying to Shinyapps.io 
+Like for the Rmd it must be copied to the project directory.
 
 ## Good sources
 
@@ -48,44 +47,14 @@ https://quarto.org/docs/blog/posts/2022-10-25-shinylive-extension/
 
 -   [ShinyApp Quarto blog](https://community.rstudio.com/t/shinyapp-in-quarto-blog/159319/2)
 
-https://jauntyjjs.github.io/Trelliscopejs_In_Quarto_Example/
+- [Quarto report with Plotly](https://jauntyjjs.github.io/Trelliscopejs_In_Quarto_Example/)
 
-I'm an R user: Quarto or R Markdown?
+- [I'm an R user: Quarto or R Markdown?](https://www.jumpingrivers.com/blog/quarto-rmarkdown-comparison/)
 
-https://www.jumpingrivers.com/blog/quarto-rmarkdown-comparison/
 
-[Notes on Changing from Rmarkdown/Bookdown to Quarto](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/)
+- [Notes on Changing from Rmarkdown/Bookdown to Quarto](https://www.njtierney.com/post/2022/04/11/rmd-to-qmd/)
 
-[FAQ for R Markdown users](https://quarto.org/docs/faq/rmarkdown.html)
+- [FAQ for R Markdown users](https://quarto.org/docs/faq/rmarkdown.html)
 
-https://laderast.github.io/qmd_rmd/#/what-is-quarto-1
+- [Quarto R Markdown differences](https://laderast.github.io/qmd_rmd/#/what-is-quarto-1)
 
-## Videos
-
-Why moving to Quarto https://www.youtube.com/watch?v=mGNW8jl7RMc
-
-1.  Quarto offers many out of the box features, Rmarkdown must use extension packages
-
-2.  Quarto is multi-language and multi engine, other languages can be used.
-
-3.  Easy migration, easy compatibility with Markdown and Jupyther
-
-<!-- 4. On Shinyapps.io quarto renders the html file in the project, Rmarkdown renders the Rmd file and executes all the code, which makes it much faster to load in Quarto -->
-
-<!-- See log file Rmarkdown -->
-
-<!-- https://www.shinyapps.io/admin/#/application/5623831/logs -->
-
-<!-- See logfile Quarto -->
-
-<!-- https://www.shinyapps.io/admin/#/application/9456928/logs -->
-
-## 1.
-
-Features:
-
-Markdown: bookdown, blogdown, distill (science publish), xaringan (presentation)
-
-Quarto offers all, it contr no need to depend on these external packgaes
-
-## 1.
