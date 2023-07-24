@@ -7,7 +7,7 @@ format:
     logo: img/mirai-solutions-logo-flyer.png
     footer: "Copyright Mirai Solutions"
     slide-number: true
-    fontsize: 25pt
+    fontsize: 22pt
     css: styles.css
     menu: 
       numbers: true
@@ -18,6 +18,7 @@ format:
     monofont: 'Source Code Pro'
     monofontoptions: 
       - Scale=0.6
+    code-overflow: wrap
 date: 2023/07/21
 date-format: |
   | MMMM D, YYYY
@@ -193,15 +194,14 @@ An R package with R Markdown article with Shiny content
 
 In our GitHub it can be visible as a [Public repository](https://github.com/miraisolutions/covid19-vaccination-ch){target="_blank"}
 
-Developed during the pandemic with the goal to provide a dashboard article analysing the past 4 weekly vaccination reports from **BAG** (*BundesAmt für Gesundheit*)^[Note].
+Developed during the pandemic with the goal to provide a dashboard article analysing the past 4 weekly vaccination reports from **BAG** (*BundesAmt für Gesundheit*). [^Note]
 
 The report compares *Vaccinated* and *Unvaccinated* populations and verifies differences in the impact of *Deaths* and *Hospitalized* figures.
 
 The app is visible in our [gallery](https://mirai-solutions.ch/gallery/covid19-vaccination-ch/){target="_blank"}.
 
-::: aside
-BAG stopped providing data in September 2022, the article is currently frozen with no data updates. 
-:::
+[^Note]: BAG stopped providing data in September 2022, the article is currently frozen with no data updates. 
+
 
 ## Technical features
 
@@ -336,7 +336,6 @@ Options for the layout can also be added (only Quarto)
 
 ```
 #| panel: sidebar
-
 ## Code
 
 ```
